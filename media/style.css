@@ -483,6 +483,11 @@ body {
     height: 330px;
     border-radius: 10000px; 
 }
+.siska {
+    width: 330px;
+    height: 330px;
+    border-radius: 600px; 
+}
 .main5_admins_description_div {
     display: flex;
     justify-content: center;
