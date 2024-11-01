@@ -1,0 +1,229 @@
+/* Obecné nastavení pro tělo stránky */
+body {
+    background: #1b1b1b;
+    color: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Kontejner hlavního obsahu */
+.container {
+    text-align: center;
+    backdrop-filter: blur(10px);
+    padding: 80px 40px 40px; /* Přidaný horní padding */
+    border-radius: 15px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    background: rgba(30, 30, 30, 0.5);
+}
+
+/* Nadpis */
+h1 {
+    margin-bottom: 20px;
+    color: #ffffff;
+    text-shadow: 0 0 10px #ffffff;
+}
+
+/* Umístění kategorií vpravo nahoře */
+.categories {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+/* Styl tlačítek kategorií */
+.button {
+    text-decoration: none;
+    padding: 10px 15px;
+    color: #ffffff;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.button:hover {
+    transform: scale(1.05);
+}
+
+/* Specifické barvy pro každou kategorii */
+.about {
+    background: rgba(70, 130, 180, 0.6);
+}
+
+.rules {
+    background: rgba(60, 179, 113, 0.6);
+}
+
+.plugins {
+    background: rgba(255, 165, 0, 0.6);
+}
+
+.datapacks {
+    background: rgba(75, 0, 130, 0.6);
+}
+
+.ateam {
+    background: rgba(255, 69, 0, 0.6);
+}
+
+.contentcreators {
+    background: linear-gradient(90deg, rgba(255, 0, 0, 0.6) 50%, rgba(138, 43, 226, 0.6) 50%);
+}
+
+/* Styl pro tlačítko zpět */
+.back {
+    background: rgba(128, 128, 128, 0.6);
+    text-align: center;
+    margin-top: 40px; /* Mezera nad tlačítkem */
+    padding: 10px 15px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+/* Styl pro kontejner pouze na stránce rules.html */
+.rules-page {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    height: auto;
+    max-height: 80vh; /* Maximální výška pro posuvník */
+    overflow-y: auto; /* Povolit svislý posuvník, pokud je obsah příliš dlouhý */
+}
+/* Styl pro tlačítko YouTubers/Streamers s plynulým přechodem */
+.contentcreators {
+    background: linear-gradient(90deg, rgba(255, 0, 0, 0.8) 0%, rgba(138, 43, 226, 0.8) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efekt částic na hover */
+.contentcreators:hover {
+    animation: particles 1.5s infinite;
+}
+
+@keyframes particles {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.5), 0 0 20px rgba(138, 43, 226, 0.5),
+                    0 0 30px rgba(255, 0, 0, 0.3), 0 0 40px rgba(138, 43, 226, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.7), 0 0 30px rgba(138, 43, 226, 0.7),
+                    0 0 40px rgba(255, 0, 0, 0.5), 0 0 50px rgba(138, 43, 226, 0.5);
+    }
+}
+
+/* Přidání efektu animace částic */
+.contentcreators::before, .contentcreators::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: rgba(255, 0, 0, 0.5);
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(1);
+    animation: particleEffect 0.5s ease-out infinite;
+}
+
+.contentcreators::after {
+    background-color: rgba(138, 43, 226, 0.5);
+}
+
+@keyframes particleEffect {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(3);
+    }
+}
+/*.............................................................
+/* Obecný styl pro všechna tlačítka */
+.button {
+    text-decoration: none;
+    padding: 10px 15px;
+    color: #ffffff;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Pulzující animace */
+@keyframes pulseEffect {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 20px currentColor;
+    }
+}
+
+/* Efekt na hover pro každé tlačítko s pulzováním vlastní barvou */
+.about:hover {
+    animation: pulseEffect 1.5s infinite;
+    color: #ffffff;
+}
+
+.rules:hover {
+    animation: pulseEffect 1.5s infinite;
+    color: #2ae911;
+}
+
+.plugins:hover {
+    animation: pulseEffect 1.5s infinite;
+    color: #ff8800;
+}
+
+.datapacks:hover {
+    animation: pulseEffect 1.5s infinite;
+    color: #4c00ff;
+}
+
+.ateam:hover {
+    animation: pulseEffect 1.5s infinite;
+    color: #ff0000;
+}
+
+/* Speciální styl pro YouTubeři/Streamers tlačítko */
+@keyframes youtubePulse {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.4), 0 0 10px rgba(138, 43, 226, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 20px rgba(138, 43, 226, 0.8);
+    }
+}
+
+.contentcreators {
+    background: linear-gradient(90deg, rgba(255, 0, 0, 0.8) 50%, rgba(138, 43, 226, 0.8) 50%);
+}
+
+.contentcreators:hover {
+    animation: youtubePulse 1.5s infinite;
+    color: #ffffff;
+}
+
+/* Efekt pro tlačítko zpět */
+.back:hover {
+    animation: pulseEffect 1.5s infinite;
+    color: #ffffff;
+}
