@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RedCraft Server</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container" id="home">
+    <div class="logo">
+      <img src="images/redcraft.jpeg" alt="RedCraft Logo">
+      <h1>RedCraft Server</h1>
+    </div>
+    <div class="nav">
+      <button data-page="home.html">Domů</button>
+      <button data-page="rules.html">Pravidla</button>
+      <button data-page="gallery.html">Galerie</button>
+      <button onclick="window.location.href='prispevky.html'">příspěvky</button>
+    </div>
+  </div>
+
+  <!-- Content section for dynamically loaded pages -->
+  <div id="content"></div>
+
+  <!-- Popup -->
+  <div id="popup" class="hidden">
+    <div class="popup-content">
+      <span id="close-popup">&times;</span>
+      <h2>Popup Title</h2>
+      <p>This is a customizable popup!</p>
+    </div>
+  </div>
+
+  <script src="emoji.js"></script>
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

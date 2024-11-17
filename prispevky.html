@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Příspěvky</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Skrytý levý panel s kategoriemi */
+        .sidebar {
+            width: 200px;
+            background-color: #333;
+            position: fixed;
+            top: 0;
+            left: -200px; /* Skrytý mimo obrazovku */
+            height: 100vh;
+            padding: 20px;
+            transition: left 0.3s ease-in-out;
+            z-index: 10;
+        }
+        .sidebar a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 15px;
+            font-weight: bold;
+            padding: 8px;
+            border-radius: 5px;
+        }
+        .sidebar a:hover {
+            background-color: #ff4b5c;
+        }
+
+        /* Tlačítko pro otevření/zavření levého panelu */
+        .menu-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 24px;  /* Zvýšení velikosti ikony */
+            z-index: 20;
+        }
+
+        /* Header přes celou šířku */
+        header {
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 20px;
+            background-color: #333;
+            display: flex;
+            justify-content: flex-end; /* Tlačítka na pravé straně */
+            align-items: center;
+            z-index: 20;
+            transition: top 0.3s ease-in-out;
+        }
+        header nav {
+            display: flex;
+            gap: 30px; /* Větší mezera mezi tlačítky */
+            margin-right: 30px; /* Aby byly tlačítka dál od pravého okraje */
+        }
+        header nav a {
+            color: white;
+            font-size: 24px; /* Větší ikony */
+            text-decoration: none;
+            transition: all 0.3s;
+            padding: 8px;
+            border-radius: 5px;
+        }
+        header nav a:hover {
+            background-color: #ff4b5c;
+        }
+
+        /* Hlavní obsah */
+        .main-content {
+            margin-left: 220px; /* Posunout obsah vpravo kvůli levému panelu */
+            margin-top: 80px; /* Posunout obsah dolů kvůli headeru */
+            padding: 20px;
+            width: calc(100% - 220px);
+        }
+
+        /* Grid pro příspěvky */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .grid-item {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        .btn-more {
+            background-color: #ff4b5c;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .post-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .post-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        /* Efekt sněhu */
+        .snowflakes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .snowflake {
+            position: absolute;
+            color: #fff;
+            font-size: 24px;
+            user-select: none;
+            animation: fall 10s linear infinite;
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Tlačítko pro otevření/zavření levého panelu -->
+<button class="menu-button" onclick="toggleSidebar()">☰</button>
+
+<!-- Levý panel s kategoriemi -->
+<div class="sidebar" id="sidebar">
+    <a href="#">Discord</a>
+    <a href="#">IRL</a>
+    <a href="#">Minecraft</a>
+    <a href="#">Other</a>
+</div>
+
+<!-- Header přes celou šířku -->
+<header id="header">
+    <nav>
+        <a href="index.html" title="Home">🏠</a>
+        <a href="pravidla.html" title="Pravidla">📜</a>
+        <a href="galerie.html" title="Galerie">🎨</a>
+    </nav>
+</header>
+
+<!-- Hlavní obsah -->
+<div class="main-content">
+    <div class="grid" id="posts-grid"></div>
+</div>
+
+<!-- Efekt sněhu -->
+<div class="snowflakes" id="snowflakes"></div>
+
+<script>
+    // Funkce pro otevření a zavření levého panelu
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        const header = document.getElementById('header');
+
+        if (sidebar.style.left === '0px') {
+            // Skrytí panelu a návrat headeru zpět
+            sidebar.style.left = '-200px';
+            header.style.top = '0';
+        } else {
+            // Zobrazení panelu a posunutí headeru
+            sidebar.style.left = '0';
+            header.style.top = '200px'; // Posuneme header dolů
+        }
+    }
+
+    // Seznam souborů (představuje obsah složky, zde uvedeno jako příklad)
+    const posts = [
+        "prispevky/prispevek1.html",
+        "prispevky/prispevek2.html",
+        "prispevky/prispevek3.html",
+        "prispevky/prispevek4.html"
+    ];
+
+    // Funkce pro načítání příspěvků
+    function loadPosts() {
+        const grid = document.getElementById("posts-grid");
+
+        // Vyprázdníme grid před každým načtením
+        grid.innerHTML = '';
+
+        // Iterace přes soubory
+        posts.forEach(post => {
+            fetch(post)
+                .then(response => {
+                    if (!response.ok) {
+                        // Pokud soubor není dostupný, přeskočíme ho
+                        return;
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    // Analyzování HTML obsahu pro získání názvu a obrázku
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(data, 'text/html');
+                    const title = doc.querySelector('title').textContent || 'Neznámý název';
+                    const image = doc.querySelector('img') ? doc.querySelector('img').src : 'default.jpg';
+
+                    // Vytvoření HTML pro každý příspěvek
+                    const postHTML = `
+                        <div class="grid-item">
+                            <div class="post">
+                                <img src="${image}" alt="Obrázek" class="post-image">
+                                <h3 class="post-title">${title}</h3>
+                                <a href="${post}" class="btn-more" target="_blank">More</a>
+                            </div>
+                        </div>
+                    `;
+                    grid.innerHTML += postHTML; // Přidáme příspěvek do gridu
+                })
+                .catch(error => console.log('Chyba při načítání příspěvku:', error));
+        });
+    }
+
+    // Zavoláme funkci pro načtení příspěvků při načtení stránky
+    window.onload = loadPosts;
+
+    // Sněhový efekt
+    function createSnowflakes() {
+        const snowflakesContainer = document.getElementById('snowflakes');
+        for (let i = 0; i < 100; i++) {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.textContent = '❄';
+            snowflake.style.left = `${Math.random() * 100}vw`;
+            snowflake.style.animationDuration = `${Math.random() * 10 + 5}s`; // Randomizace rychlosti
+            snowflakesContainer.appendChild(snowflake);
+        }
+    }
+
+    // Zavoláme funkci pro sníh při načtení stránky
+    window.onload = function() {
+        loadPosts();
+        createSnowflakes();
+    };
+</script>
+
+</body>
+</html>
